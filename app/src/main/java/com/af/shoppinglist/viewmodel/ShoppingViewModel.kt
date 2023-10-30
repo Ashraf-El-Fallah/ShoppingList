@@ -1,6 +1,7 @@
 package com.af.shoppinglist.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.af.shoppinglist.data.db.entites.ShoppingItem
 import com.af.shoppinglist.data.repositories.ShoppingRepository
 import kotlinx.coroutines.CoroutineScope
@@ -11,11 +12,11 @@ class ShoppingViewModel(
     private val repository: ShoppingRepository
 ) : ViewModel() {
 
-    fun upsert(item: ShoppingItem) = CoroutineScope(Dispatchers.Main).launch {
+    fun upsert(item: ShoppingItem) = viewModelScope.launch {
         repository.upsert(item)
     }
 
-    fun delete(item: ShoppingItem) = CoroutineScope(Dispatchers.Main).launch {
+    fun delete(item: ShoppingItem) = viewModelScope.launch {
         repository.delete(item)
     }
 
